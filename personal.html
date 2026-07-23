@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Off Duty — Lawrence Jed Garcia</title>
+<meta name="description" content="A little about Lawrence Jed Garcia outside of work — games, staying active, and his cat Raze.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="index.html">Lawrence Jed Garcia</a>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="work.html">Work</a>
+    <a href="personal.html" class="active">Off Duty</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="page-head wrap">
+  <span class="eyebrow">Off duty</span>
+  <h1>Outside of work</h1>
+</div>
+
+<section id="personal" class="personal">
+  <div class="wrap">
+    <div class="entry"><p>I play a lot of online games — Dota 2, Skyrim, and FPS games when I want something faster-paced.</p></div>
+    <div class="entry"><p>Trying to keep a healthy routine too, working out when I can.</p></div>
+
+    <div class="entry" style="display:flex; gap:18px; align-items:center;">
+      <div style="display:flex; gap:8px; flex-shrink:0;">
+        <a href="raze.jpg" target="_blank" rel="noopener" aria-label="View full-size photo of Raze">
+          <img src="raze.jpg" alt="Raze, an orange Persian cat" style="width:84px; height:84px; border-radius:12px; object-fit:cover; display:block;">
+        </a>
+        <a href="raze2.jpg" target="_blank" rel="noopener" aria-label="View full-size photo of Raze looking up">
+          <img src="raze2.jpg" alt="Raze the cat looking up" style="width:84px; height:84px; border-radius:12px; object-fit:cover; display:block;">
+        </a>
+      </div>
+      <p>And yes, there's a cat. This is <strong>Raze</strong>, my orange Persian — he's on a personal mission to destroy every window screen in the house.</p>
+    </div>
+
+    <div class="entry"><p>I'm actually an introvert, but I love traveling to new places and trying things I wouldn't normally do.</p></div>
+    <div class="entry"><p>I'm also into anime, and somehow I'm always the one planning the trips with my friends.</p></div>
+    <div class="entry"><p>I help my parents with our apartment rental business too — dealing with tenant concerns and looking for new tenants when a unit opens up.</p></div>
+  </div>
+</section>
+
+<footer>© <span id="year"></span> Lawrence Jed Garcia · <a class="link" href="testimonial.html" style="color:inherit;">share feedback</a></footer>
+
+<script src="transitions.js" defer></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

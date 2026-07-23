@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share a testimonial — Lawrence Jed Garcia</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #fafaf8;
+    --text: #1c1c1a;
+    --text-dim: #6b6b66;
+    --line: #e4e3de;
+    --accent: #a35b3d;
+    --max: 560px;
+  }
+  * { box-sizing: border-box; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1{ font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em; margin:0; }
+  .wrap{ max-width: var(--max); margin: 0 auto; padding: 90px 28px 80px; }
+  p.sub{ color: var(--text-dim); margin-top: 14px; font-size: 1rem; max-width: 48ch; }
+
+  form{ margin-top: 40px; }
+  .field{ margin-bottom: 22px; }
+  label{ display:block; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 6px; }
+  input[type="text"], input[type="email"], textarea{
+    width: 100%;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--text);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 14px;
+  }
+  input:focus, textarea:focus{ outline: 2px solid var(--accent); outline-offset: 1px; }
+  textarea{ resize: vertical; min-height: 110px; }
+
+  .hint{ font-size: 0.82rem; color: var(--text-dim); margin-top: 6px; }
+
+  button{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 6px;
+    padding: 13px 26px;
+    cursor: pointer;
+    transition: opacity .15s ease;
+  }
+  button:hover{ opacity: 0.9; }
+  button:disabled{ opacity: 0.6; cursor: not-allowed; }
+
+  .honeypot{ position: absolute; left: -9999px; }
+
+  #success{
+    display:none;
+    margin-top: 40px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+  }
+  #success h2{ font-family:'Space Grotesk', sans-serif; font-size: 1.2rem; margin: 0 0 8px; }
+  #success p{ color: var(--text-dim); margin: 0; }
+
+  #error{
+    display:none;
+    margin-top: 16px;
+    color: #a33d3d;
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a class="link" href="index.html" style="font-size:0.85rem; color:var(--text-dim);">← back to site</a>
+  <h1 style="margin-top:18px;">Got a minute?</h1>
+  <p class="sub">
+    I'm putting together a short testimonials section on my portfolio site, and I'd love
+    a line or two from you about what it was like working together. Doesn't need to be
+    polished — just honest is perfect.
+  </p>
+
+  <form id="testimonialForm" name="testimonial" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="testimonial">
+    <p class="honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+    <div class="field">
+      <label for="name">Your name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="field">
+      <label for="role">Your role / company (optional)</label>
+      <input type="text" id="role" name="role" placeholder="e.g. Purchasing Manager, Vistaland and Lifescapes">
+    </div>
+
+    <div class="field">
+      <label for="email">Email (optional, in case I want to follow up)</label>
+      <input type="email" id="email" name="email">
+    </div>
+
+    <div class="field">
+      <label for="testimonial">Your testimonial</label>
+      <textarea id="testimonial" name="testimonial" required placeholder="A sentence or two about working with me — reliability, problem-solving, whatever stands out."></textarea>
+      <div class="hint">Totally fine if it's short — 1–2 sentences is plenty.</div>
+    </div>
+
+    <div class="field">
+      <label for="permission">Okay to share publicly on my site?</label>
+      <input type="text" id="permission" name="permission" placeholder="Yes / Yes, but anonymous / No, just for you">
+    </div>
+
+    <button type="submit" id="submitBtn">Send it</button>
+    <div id="error">Something went wrong — mind trying again, or emailing it to me instead?</div>
+  </form>
+
+  <div id="success">
+    <h2>Got it — thank you!</h2>
+    <p>Really appreciate you taking the time. I'll follow up if I have any questions.</p>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('testimonialForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const successBox = document.getElementById('success');
+  const errorBox = document.getElementById('error');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    errorBox.style.display = 'none';
+
+    const formData = new FormData(form);
+    const encoded = new URLSearchParams(formData).toString();
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encoded
+    })
+    .then(() => {
+      form.style.display = 'none';
+      successBox.style.display = 'block';
+    })
+    .catch(() => {
+      errorBox.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send it';
+    });
+  });
+</script>
+
+</body>
+</html>
