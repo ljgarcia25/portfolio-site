@@ -21,10 +21,10 @@ export default async function handler(req, res) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.TESTIMONIAL_TO_EMAIL;
+  const toEmail = process.env.TESTIMONIAL_TO_EMAIL || 'lawrencejedgarcia225@gmail.com';
 
-  if (!apiKey || !toEmail) {
-    console.error('Missing RESEND_API_KEY or TESTIMONIAL_TO_EMAIL environment variable');
+  if (!apiKey) {
+    console.error('Missing RESEND_API_KEY environment variable');
     return res.status(500).json({ error: 'Server not configured' });
   }
 
