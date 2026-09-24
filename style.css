@@ -122,6 +122,7 @@ header.hero{ padding: 48px 28px 64px; }
 }
 .process .steps{ margin-top: 6px; }
 .process .steps span:not(:last-child)::after{ content: ' → '; color: var(--line); }
+.process.tools{ margin-top: 24px; text-align: center; }
 
 /* ---------- page header (non-home pages) ---------- */
 .page-head{ padding: 48px 28px 8px; }
